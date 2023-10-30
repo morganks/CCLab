@@ -40,15 +40,15 @@ class Organism { //defines a class for the organisms (watched youtube tutorial)
   update() {
     let currentTime = millis() - this.startTime; //(watched youtube tutorial)
 
-    if (!this.isDone) {
-      let xOffset = random(-10, 10);
-      let yOffset = random(-10, 10);
+    if (!this.isDone) { //conditional, checks if "isDone" is 'false'.
+      let xOffset = random(-10, 10); //random movement of the organism
+      let yOffset = random(-10, 10); //random movement of the organism
 
-      if (this.x + xOffset > 0 && this.x + xOffset < width && this.y + yOffset > 0 && this.y + yOffset < height) {
+      if (this.x + xOffset > 0 && this.x + xOffset < width && this.y + yOffset > 0 && this.y + yOffset < height) { //checks to see if the random movements are within the canvas
         this.x += xOffset;
         this.y += yOffset;
 
-        let point = createVector(this.x, this.y);
+        let point = createVector(this.x, this.y); //creates new vector 'point' which represents current (x,y) position of the orgnaism        
         this.history.push(point);
 
         radius += 0.5;
