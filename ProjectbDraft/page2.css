@@ -10,19 +10,21 @@
     width: 100px;
     height: 100px;
 
-    display: inline-block;
+    display: inline-block; 
+    
 
 }
 
 #box3{
-    background-color: lightgreen;
+    background-color: lightskyblue;
     width: 100px;
     height: 100px;
     display: inline-block;
+  
 }
 
 #box4{
-    background-color: yellowgreen;
+    background-color: lightsteelblue;
     width: 100px;
     height: 100px;
     display: inline-block;
@@ -59,3 +61,33 @@
     width: 100px;
     height: 100px;
 }
+#p5container canvas{
+   
+    display: block;
+    margin:auto
+}
+#p5container{
+    /* border: 3px solid black; */
+    /* width: 30%; */
+    display: inline-block;
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%)
+}
+#display{
+    margin-top: 150px;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#background{
+    background-image: url('/assets/bkg1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 155vh;
+    
+}
+

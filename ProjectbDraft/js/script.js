@@ -1,42 +1,132 @@
-let sound;
 let amplitude;
+let circle;
+let trail = [];
+let songs = [];
+let sound, sound2, sound3   
+let playTracker = 0;
 
 function preload() {
-  sound = loadSound('Understand.mp3');
+ sound = loadSound('assets/Understand.mp3');
+  
+  //another song
+  sound2 = loadSound('assets/Prospect.mp3');
+  sound3 = loadSound('assets/merry-go-round.mp3');
+  songs.push(sound);
+  songs.push(sound2);
+  console.log(songs);
+  }
+
+function setup() {
+
+  let p = createCanvas(500,500);
+    p.parent('p5container');
+  amplitude = new p5.Amplitude();
+
+  circle = {
+    x: width / 2,
+    y: height / 2,
+    radius: 20,
+    speedX: random(1, 3),
+    speedY: random(1, 3)
+  };
 }
 
-function setup()  {
-  createCanvas(400, 400);
-  amplitude = new p5.Amplitude();
-} 
-
 function draw() {
- 
+  //background(51);
 
   let level = amplitude.getLevel();
-  let direction = map(level, 0, 1, 0, TWO_PI); //analyze amplitude
+  let direction = map(level, 0, 1, 0, TWO_PI); // analyze amplitude
 
-  let x1 = width / 2;
-  let y1 = height / 2;
-  let length = map(level, 0, 1, 100, 600); // use analyzed amplitude to get points for the line
+  // Update circle position
+  circle.x += circle.speedX * cos(direction);
+  circle.y += circle.speedY * sin(direction);
 
-  // get endpoint of the line based on the direction and length
-  let x2 = x1 + cos(direction) * length;
-  let y2 = y1 + sin(direction) * length;
+  // Keep drawer within canvas
+  if (circle.x - circle.radius < 0 || circle.x + circle.radius > width) {
+    circle.speedX *= -1;
+  }
+  if (circle.y - circle.radius < 0 || circle.y + circle.radius > height) {
+    circle.speedY *= -1;
+  }
 
-  // Draw the line
-  stroke(0);
-  line(x1, y1, x2, y2);
+  //circle radius based on the sound amplitude
+  let minRadius = 3;
+  circle.radius = map(level, 0, 1, minRadius, 30);
+
+  // Draw the circle
+  fill(0, 150, 255);
+  noStroke();
+  ellipse(circle.x, circle.y, circle.radius * 2);
+  
+
+
 }
 
 function keyPressed() {
+  
   if (keyCode === 32) {
-    if (sound.isPlaying()) {
-      sound.pause();
-    } else {
-      sound.play();
+    if(playTracker == 1){
+      if (sound.isPlaying()) {
+        sound.pause();
+      } else {
+        sound.play();
+      }
     }
+    
+    if(playTracker == 2){
+      if (sound2.isPlaying()) {
+        sound2.pause();
+      } else {
+        sound2.play();
+      }
+    }
+    
+     if(playTracker == 3){
+      if (sound3.isPlaying()) {
+        sound3.pause();
+      } else {
+        sound3.play();
+      }
+    }
+
+
+    
+ 
+    
   } else if (keyCode === BACKSPACE) {
     sound.stop();
   }
+   if (keyCode === LEFT_ARROW){
+    if(!sound.isPlaying()){
+        sound.play();
+        playTracker = 1;
+
+    }
+    sound2.pause();
+    sound3.pause();  
+  }
+  
+  if (keyCode === UP_ARROW){
+    if(!sound2.isPlaying()){
+        sound2.play();
+        playTracker = 2;
+    }
+    sound.pause();
+    sound3.pause();  
+  }
+    if (keyCode === RIGHT_ARROW){
+    if(!sound3.isPlaying()){
+        sound3.play();
+        playTracker = 3;
+
+    }
+    sound.pause();
+    sound2.pause();  
+  }
+   
+    
+  
+  
+  
+
 }
