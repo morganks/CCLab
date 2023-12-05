@@ -2,24 +2,24 @@ let amplitude;
 let circle;
 let trail = [];
 let songs = [];
-let sound, sound2, sound3   
+let sound, sound2, sound3
 let playTracker = 0;
 
 function preload() {
- sound = loadSound('assets/Understand.mp3');
-  
+  sound = loadSound('assets/Understand.mp3');
+
   //another song
   sound2 = loadSound('assets/Prospect.mp3');
   sound3 = loadSound('assets/merry-go-round.mp3');
   songs.push(sound);
   songs.push(sound2);
   console.log(songs);
-  }
+}
 
 function setup() {
 
-  let p = createCanvas(500,500);
-    p.parent('p5container');
+  let p = createCanvas(500, 500);
+  p.parent('p5container');
   amplitude = new p5.Amplitude();
 
   circle = {
@@ -57,76 +57,99 @@ function draw() {
   fill(0, 150, 255);
   noStroke();
   ellipse(circle.x, circle.y, circle.radius * 2);
-  
+
 
 
 }
+function mousePressed() {
+
+  if (playTracker == 1) {
+    if (sound.isPlaying()) {
+      sound.pause();
+    } else {
+      sound.play();
+    }
+  }
+  if (playTracker == 2) {
+    if (sound2.isPlaying()) {
+      sound2.pause();
+    } else {
+      sound2.play();
+    }
+  }
+  if (playTracker == 3) {
+    if (sound3.isPlaying()) {
+      sound3.pause();
+    } else {
+      sound3.play();
+    }
+  }
+
+}
+
+
 
 function keyPressed() {
-  
-  if (keyCode === 32) {
-    if(playTracker == 1){
-      if (sound.isPlaying()) {
-        sound.pause();
-      } else {
-        sound.play();
-      }
-    }
-    
-    if(playTracker == 2){
-      if (sound2.isPlaying()) {
-        sound2.pause();
-      } else {
-        sound2.play();
-      }
-    }
-    
-     if(playTracker == 3){
-      if (sound3.isPlaying()) {
-        sound3.pause();
-      } else {
-        sound3.play();
-      }
-    }
+
+  // if (keyCode === 32) {
+  //   if(playTracker == 1){
+  //     if (sound.isPlaying()) {
+  //       sound.pause();
+  //     } else {
+  //       sound.play();
+  //     }
+  //   }
+
+  //   if(playTracker == 2){
+  //     if (sound2.isPlaying()) {
+  //       sound2.pause();
+  //     } else {
+  //       sound2.play();
+  //     }
+  //   }
+
+  //    if(playTracker == 3){
+  //     if (sound3.isPlaying()) {
+  //       sound3.pause();
+  //     } else {
+  //       sound3.play();
+  //     }
+  //   }
 
 
-    
- 
-    
-  } else if (keyCode === BACKSPACE) {
+
+
+  if (keyCode === BACKSPACE) {
     sound.stop();
   }
-   if (keyCode === LEFT_ARROW){
-    if(!sound.isPlaying()){
-        sound.play();
-        playTracker = 1;
+  if (keyCode === LEFT_ARROW) {
+    if (!sound.isPlaying()) {
+      sound.play();
+      playTracker = 1;
 
     }
     sound2.pause();
-    sound3.pause();  
+    sound3.pause();
   }
-  
-  if (keyCode === UP_ARROW){
-    if(!sound2.isPlaying()){
-        sound2.play();
-        playTracker = 2;
+
+  if (keyCode === UP_ARROW) {
+    if (!sound2.isPlaying()) {
+      sound2.play();
+      playTracker = 2;
     }
     sound.pause();
-    sound3.pause();  
+    sound3.pause();
   }
-    if (keyCode === RIGHT_ARROW){
-    if(!sound3.isPlaying()){
-        sound3.play();
-        playTracker = 3;
+
+  if (keyCode === RIGHT_ARROW) {
+    if (!sound3.isPlaying()) {
+      sound3.play();
+      playTracker = 3;
 
     }
     sound.pause();
-    sound2.pause();  
+    sound2.pause();
   }
-   
-    
-  
-  
-  
+
 
 }
