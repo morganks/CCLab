@@ -83,7 +83,7 @@
     margin-right: auto;
 }
 #background{
-    background-image: url('/assets/bkg1.png');
+    background-image: url('assets/bkg1.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
